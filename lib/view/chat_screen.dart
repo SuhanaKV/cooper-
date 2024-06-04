@@ -7,7 +7,7 @@ import 'package:cooper/widgets/logo.dart';
 import 'package:cooper/widgets/my_text.dart';
 import 'package:cooper/widgets/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({ super.key });
@@ -187,7 +187,7 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: EdgeInsets.symmetric(horizontal: Dimensions.width10, vertical: Dimensions.height6),
           child: Row(children: [ 
             container(
-              width: Get.width-120,
+              width:  MediaQuery.of(context).size.width-120,//Get.width-120,
               child: TextField(controller: controller,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -264,8 +264,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return Padding(
       padding:  EdgeInsets.only(top:Dimensions.height20),
-      child: Container(width: Get.width,
-      height: Get.height,
+      child: Container(width: MediaQuery.of(context).size.width,//Get.width,
+      height:  MediaQuery.of(context).size.height,//Get.height,
       decoration: BoxDecoration(
         color: AppColors.background,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(Dimensions.radius20), topRight:  Radius.circular(Dimensions.radius20))),
@@ -288,13 +288,13 @@ class _ChatScreenState extends State<ChatScreen> {
           leading: Padding(
             padding:  EdgeInsets.only(left: Dimensions.width8, top: Dimensions.height8),
             child: appbarButton(icon: Icons.keyboard_arrow_left,
-             onTap:() => Get.back(),),
+             onTap:() => Navigator.of(context).pop(),)//Get.back(),),
           ),
           actions: [ 
             const Spacer(),
             Padding(
               padding: EdgeInsets.only( top: Dimensions.height8),
-              child: logo(Dimensions.radius18),
+              child: logo(Dimensions.radius18, context),
             ),
             SizedBox(width: Dimensions.width6,),
             Padding(

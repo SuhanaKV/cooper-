@@ -1,17 +1,20 @@
 import 'dart:core';
 
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+
+//import 'package:get/get.dart';
 
 class Dimensions {
-  static double screenHeight = Get.context!.height; //731.42
-  static double screenWidth = Get.context!.width; //411.42
-
+  static double screenHeight = 731.42;//Get.context!.height; //731.42
+  static double screenWidth = 411.42;//Get.context!.width; //411.42
   static double averageScreen = (screenHeight + screenWidth) / 2;
   //average 571.42
-  /*Dimensions(){
-    print(Get.context!.height);
-    print(Get.context!.width);
-  }*/
+  
+  Dimensions(BuildContext context){
+   screenHeight = MediaQuery.of(context).size.height;
+    screenWidth = MediaQuery.of(context).size.width;
+    averageScreen = (screenHeight + screenWidth) / 2; 
+  }
 
 
 

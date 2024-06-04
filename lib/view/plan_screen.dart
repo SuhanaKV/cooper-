@@ -6,14 +6,20 @@ import 'package:cooper/widgets/curved_text.dart';
 import 'package:cooper/widgets/my_text.dart';
 import 'package:cooper/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 
-class PlanScreen extends StatelessWidget {
+class PlanScreen extends StatefulWidget {
 const PlanScreen({ super.key });
 
+  @override
+  State<PlanScreen> createState() => _PlanScreenState();
+}
+
+class _PlanScreenState extends State<PlanScreen> {
   Widget proStack(){
     return container(
       height: Dimensions.height110,
+      width: Dimensions.width120,
       child: Stack(
         alignment: Alignment.center,
         children: [ 
@@ -54,7 +60,7 @@ const PlanScreen({ super.key });
     }){
       return container(color: color,
       radius: Dimensions.radius25,
-      width: Get.width,
+      width: MediaQuery.of(context).size.width,//Get.width,
       child: Padding(
         padding: EdgeInsets.all(Dimensions.padding10),
         child: Column(children: [ 
@@ -129,18 +135,22 @@ const PlanScreen({ super.key });
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.white,
-        body: Stack(children: [ 
-          content(),
-          Positioned(
-            top: Dimensions.height15,
-            left: Dimensions.width15,
-            child: appbarButton(
-              onTap: () => Get.back(),
-              backColor: AppColors.background,
-            icon: Icons.keyboard_arrow_left),
-          )
-
-        ],),
+        body: container(
+          width: MediaQuery.of(context).size.width,//Get.width,
+          height: MediaQuery.of(context).size.height,//Get.height,
+          child: Stack(children: [ 
+            content(),
+            Positioned(
+              top: Dimensions.height15,
+              left: Dimensions.width15,
+              child: appbarButton(
+                onTap: () => Navigator.of(context).pop(),//Get.back(),
+                backColor: AppColors.background,
+              icon: Icons.keyboard_arrow_left),
+            )
+          
+          ],),
+        ),
         bottomNavigationBar: BottomAppBar(
           height: Dimensions.height90,
           color: AppColors.white,

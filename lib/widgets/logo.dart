@@ -1,13 +1,18 @@
 import 'package:cooper/utils/app_colors.dart';
 import 'package:cooper/utils/dimensions.dart';
+import 'package:cooper/view/plan_screen.dart';
 import 'package:cooper/widgets/container.dart';
 import 'package:cooper/widgets/my_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 
-Widget logo(radius){
+Widget logo(radius, context){
   return InkWell(
-     onTap: () => Get.toNamed('/plan'),
+     onTap: () =>Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) =>  PlanScreen(),
+    ),
+  ),//Get.to(PlanScreen()),
     child: container(height: Dimensions.height60,
     radius: Dimensions.radius30,
     color: AppColors.background,

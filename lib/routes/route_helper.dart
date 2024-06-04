@@ -1,4 +1,4 @@
-import 'package:cooper/view/chat_screen.dart';
+/*import 'package:cooper/view/chat_screen.dart';
 import 'package:cooper/view/home.dart';
 import 'package:cooper/view/plan_screen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -27,4 +27,4 @@ class RouteHelper{
         transition: Transition.fadeIn),
 
   ];
-}
+}*/

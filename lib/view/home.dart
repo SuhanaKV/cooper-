@@ -1,5 +1,6 @@
 import 'package:cooper/utils/app_colors.dart';
 import 'package:cooper/utils/dimensions.dart';
+import 'package:cooper/view/chat_screen.dart';
 import 'package:cooper/widgets/container.dart';
 import 'package:cooper/widgets/curved_text.dart';
 import 'package:cooper/widgets/logo.dart';
@@ -8,7 +9,7 @@ import 'package:cooper/widgets/my_text.dart';
 import 'package:cooper/widgets/welcome_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   const Home({ super.key });
@@ -27,7 +28,7 @@ class _HomeState extends State<Home> {
   return Padding(
     padding:  EdgeInsets.all(Dimensions.padding16),
     child: Row(children: [ 
-      logo(Dimensions.radius20),
+      logo(Dimensions.radius20, context),
       const Spacer(),
       profile(Dimensions.radius25, image: "assets/images/profile.jpeg")
     ],),
@@ -62,7 +63,12 @@ Widget cooperOpButton({
 }){
   return InkWell(
     onTap: (){
-      Get.toNamed('/chat');
+     Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) =>  ChatScreen(),
+    ),
+  );
+     // Get.to(ChatScreen());
     },
     child: container(
       radius: Dimensions.radius25,
@@ -95,20 +101,20 @@ Widget cooperOpButton({
 Widget cooperOptions(){
   return container(
     height: Dimensions.height300,
-        width: Get.width,
+        width: MediaQuery.of(context).size.width,//Get.width,
     child: Stack(
       children: [ Positioned(
         top: Dimensions.height6,
         right: 0,
         left: 0,
         child: container(height: Dimensions.height280,
-        width: Get.width,
+        width: MediaQuery.of(context).size.width,// Get.width,
         child: Row(
           children: [ 
           Expanded(
             flex: 1,
             child:  cooperOpButton(
-            height: Get.height,
+            height: MediaQuery.of(context).size.height,// Get.height,
           color1: AppColors.lightPurple,
           color2: AppColors.darkPurple,
             icon: Icons.mic_none_outlined, text1: "Talk with\nCooper", text2: "Let's try it now"), ),
@@ -169,7 +175,7 @@ Widget searchList(){
       child: container(
         radius: Dimensions.radius25,
         height: Dimensions.height60,
-        width: Get.width,
+        width: MediaQuery.of(context).size.width,//Get.width,
         color: AppColors.background,
         child: Padding(
           padding: EdgeInsets.only(top: Dimensions.height8, bottom: Dimensions.height8, left: Dimensions.width8, right: Dimensions.width10),
@@ -223,33 +229,37 @@ Widget searchList(){
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.white,
-        body: Stack(
-          children: [ 
-            SingleChildScrollView(
-            child: Padding(
-              padding:  EdgeInsets.only(left: Dimensions.width15, right: Dimensions.width15, top: Dimensions.txt20, bottom: Dimensions.height15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomPaint(
-            size: Size(Dimensions.width400, Dimensions.height250),
-            painter: CurvedLineAndTextPainter(),
+        body: container(
+          width: MediaQuery.of(context).size.width,//Get.width,
+          height: MediaQuery.of(context).size.height,//Get.height,
+          child: Stack(
+            children: [ 
+              SingleChildScrollView(
+              child: Padding(
+                padding:  EdgeInsets.only(left: Dimensions.width15, right: Dimensions.width15, top: Dimensions.txt20, bottom: Dimensions.height15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomPaint(
+              size: Size(Dimensions.width400, Dimensions.height250),
+              painter: CurvedLineAndTextPainter(),
+            ),
+                  welcomeText(
+                    text1: "Hello James",
+                    text2: "Make your day easy with us"
+                  ),
+                  SizedBox(height: Dimensions.height8,),
+                  cooperOptions(),
+                  SizedBox(height: Dimensions.height30,),
+                  headingRow(),
+                  SizedBox(height: Dimensions.height20,),
+                  searchList(),
+            
+                ],),
+              )
+            ),
+            Positioned(child: appBar())],
           ),
-                welcomeText(
-                  text1: "Hello James",
-                  text2: "Make your day easy with us"
-                ),
-                SizedBox(height: Dimensions.height8,),
-                cooperOptions(),
-                SizedBox(height: Dimensions.height30,),
-                headingRow(),
-                SizedBox(height: Dimensions.height20,),
-                searchList(),
-          
-              ],),
-            )
-          ),
-          Positioned(child: appBar())],
         )),
     );
   }
